@@ -38,9 +38,15 @@ class BuildtargetTests(unittest.TestCase):
         bar = Bar()
         self.assertEqual(str(bar), "{age=12, name=Lisa}")
 
-    def test_to_string_attributes_defined_with_self_are_returned(self):
+    def test_to_string_returns_instance_attributes(self):
+        bar = Bar()
+        bar.age = 22
+        bar.name = "Jonah"
+        self.assertEqual(str(bar), "{age=22, name=Jonah}")
+
+    def test_to_string_attributes_defined_with_self_are_not_returned(self):
         baz = Baz(True)
-        self.assertEqual(str(baz), "{age=12, name=Lisa, new=True}")
+        self.assertEqual(str(baz), "{age=12, name=Lisa}")
 
     def test_buildtarget_does_not_override_method_doc(self):
         self.assertEqual(Bar.__doc__, "Class is pointless")

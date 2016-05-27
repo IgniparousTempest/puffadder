@@ -20,14 +20,15 @@ def to_string(original_class):
         attributes = [attr for attr in dir(self) if
                       not attr.startswith("_") and
                       not (
-                          hasattr(original_class.__dict__[attr], "__call__")
-                          if attr in original_class.__dict__
-                          else hasattr(self.__dict__[attr], "__call__"))]
+                          hasattr(self.__dict__[attr], "__call__")
+                          if attr in self.__dict__
+                          else hasattr(original_class.__dict__[attr], "__call__")) and
+                      attr in original_class.__dict__]
 
         formatted_vars = ["{}={}".format(attr,
-                                         original_class.__dict__[attr]
-                                         if attr in original_class.__dict__
-                                         else self.__dict__[attr])
+                                         self.__dict__[attr]
+                                         if attr in self.__dict__
+                                         else original_class.__dict__[attr])
                           for attr in attributes]
 
         return "{{{}}}".format(', '.join(formatted_vars))
