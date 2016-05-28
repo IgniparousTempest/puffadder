@@ -29,10 +29,17 @@ def builder(original_class):
     original_init = original_class.__init__
 
     def __init__(self, **kwargs):
+        # Get parameters in original init
+        original_parameters = []
+        if hasattr(original_init, "__code__"):
+            original_parameters = original_init.__code__.co_varnames[1:]
+
         for attr in attributes:
             try:
                 self.__dict__[attr] = kwargs[attr]
-                del kwargs[attr]
+                # preserve input for original init
+                if attr not in original_parameters:
+                    del kwargs[attr]
             except KeyError:
                 raise TypeError("__init__() missing 1 required positional argument: '{}'".format(attr))
 

@@ -31,6 +31,15 @@ class Baz(object):
     age = 12
 
 
+@builder
+class FooBar(object):
+    def __init__(self, name):
+        self.name = name + " Pitcher"
+    _hidden_var = 1
+    name = "Lisa"
+    age = 12
+
+
 class BuildtargetTests(unittest.TestCase):
     def test_to_string_ignores_functions(self):
         foo = Foo(
@@ -92,12 +101,21 @@ class BuildtargetTests(unittest.TestCase):
         self.assertEqual(baz.age, 24)
         self.assertEqual(baz.new, False)
 
+    def test_to_string_preserves_original_init_with_duplicate_init_parameters(self):
+        foobar = FooBar(
+            name="Courtney",
+            age=24
+        )
+        self.assertEqual(foobar.name, "Courtney Pitcher")
+        self.assertEqual(foobar.age, 24)
+
     def test_buildtarget_does_not_override_class_doc(self):
         self.assertEqual(Bar.__doc__, "Class is pointless")
         self.assertEqual(Foo.__doc__, None)
 
     def test_buildtarget_does_not_override_init_method_doc(self):
         self.assertEqual(Baz.__init__.__doc__, "The doc")
+        self.assertEqual(FooBar.__init__.__doc__, None)
 
 
 if __name__ == '__main__':
