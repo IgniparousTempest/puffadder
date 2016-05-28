@@ -86,15 +86,11 @@ john = Student(
 <td>
   <pre lang="python">
 class Student(object):
-  _private_attribute = "This will not be seen"
-  name = "Sally"
-  age = 22
-  full_time = True
-
-  def __init__(self, name, age, full_time):
+  def __init__(self, name="Sally", age=22, full_time=True):
     self.name = name
     self.age = age
     self.full_time = full_time
+    self._private_attribute = "This will not be seen"
 
 john = Student(
     name="John",
