@@ -1,5 +1,26 @@
 # Possibly consider using exec, so that we can see the names. Could be dangerous though, so I'm not sure.
 def builder(original_class):
+    """
+    Adds a __init__ function with all class attributes as parameters.
+    If there is an __init__ defined already, it applies the generated one and then the original one.
+
+    e.g.:
+    @builder
+    class Foo(object):
+        _internal_attribute = "This will not be set"
+        name = "Lisa"
+        age = 12
+
+        def bar(self):
+            pass
+
+    foo = Foo(
+        name="Johan",
+        age=32
+    )
+    """
+
+    # Gets all public class attributes
     attributes = [attr for attr in dir(original_class) if
                   not attr.startswith("_") and
                   attr in original_class.__dict__ and

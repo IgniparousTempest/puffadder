@@ -17,6 +17,8 @@ def to_string(original_class):
     """
 
     def __str__(self):
+        # Get the names of attributes that were defined in the class and make sure they have not been repurposed as
+        # methods in the instance
         attributes = [attr for attr in dir(self) if
                       not attr.startswith("_") and
                       not (
@@ -25,6 +27,7 @@ def to_string(original_class):
                           else hasattr(original_class.__dict__[attr], "__call__")) and
                       attr in original_class.__dict__]
 
+        # Format with the value in the instance if it has been changed since instantiation
         formatted_vars = ["{}={}".format(attr,
                                          self.__dict__[attr]
                                          if attr in self.__dict__
