@@ -121,9 +121,8 @@ Vanilla Python
   <pre lang="python">
 @contructor
 class Student(object):
-  _private_attribute = "This will not be seen"
-  def __init__(self, name="Sally", age=22, full_time=True):
-    pass
+  def __init__(self, name, age=22, full_time=True):
+    self._private_attribute = "private"
 
 john = Student(
     name="John",
@@ -135,11 +134,11 @@ john = Student(
 <td>
   <pre lang="python">
 class Student(object):
-  def __init__(self, name="Sally", age=22, full_time=True):
+  def __init__(self, name, age=22, full_time=True):
     self.name = name
     self.age = age
     self.full_time = full_time
-    self._private_attribute = "This will not be seen"
+    self._private_attribute = "private"
 
 john = Student(
     name="John",
