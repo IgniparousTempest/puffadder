@@ -101,3 +101,52 @@ john = Student(
 </td>
 </tr>
 </table>
+
+
+## @constructor
+
+Adds all parameters defined in the contructor to the class's properties.
+
+<table border="0">
+<tr>
+<td>
+Puffadder
+</td>
+<td>
+Vanilla Python
+</td>
+</tr>
+<tr valign="top">
+<td>
+  <pre lang="python">
+@contructor
+class Student(object):
+  _private_attribute = "This will not be seen"
+  def __init__(self, name="Sally", age=22, full_time=True):
+    pass
+
+john = Student(
+    name="John",
+    age=30,
+    full_time=False
+)
+  </pre>
+</td>
+<td>
+  <pre lang="python">
+class Student(object):
+  def __init__(self, name="Sally", age=22, full_time=True):
+    self.name = name
+    self.age = age
+    self.full_time = full_time
+    self._private_attribute = "This will not be seen"
+
+john = Student(
+    name="John",
+    age=30,
+    full_time=False
+)
+  </pre>
+</td>
+</tr>
+</table>
