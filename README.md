@@ -105,7 +105,7 @@ john = Student(
 
 ## @constructor
 
-Adds all parameters defined in the contructor to the class's properties.
+Adds all parameters defined in the constructor to the class's properties. If a constructor was defined it is run after the generated constructor.
 
 <table border="0">
 <tr>
