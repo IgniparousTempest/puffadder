@@ -6,7 +6,7 @@ from builder import builder
 @builder
 class Foo(object):
     def bar(self):
-        pass
+        return "bar"
 
     name = "Lisa"
     age = 12
@@ -41,15 +41,16 @@ class FooBar(object):
 
 
 class BuildtargetTests(unittest.TestCase):
-    def test_to_string_ignores_functions(self):
+    def test_builder_ignores_functions(self):
         foo = Foo(
             name="Matthew",
             age=22
         )
         self.assertEqual(foo.name, "Matthew")
         self.assertEqual(foo.age, 22)
+        self.assertEqual(foo.bar(), "bar")
 
-    def test_to_string_raises_type_error_if_argument_is_missing(self):
+    def test_builder_raises_type_error_if_argument_is_missing(self):
         expected_error_message = "__init__() missing 1 required positional argument: 'age'"
 
         with self.assertRaises(TypeError) as cm:
@@ -59,7 +60,7 @@ class BuildtargetTests(unittest.TestCase):
 
         self.assertEqual(str(cm.exception), expected_error_message)
 
-    def test_to_string_raises_type_error_if_too_many_arguments_present_and_constructor(self):
+    def test_builder_raises_type_error_if_too_many_arguments_present_and_constructor(self):
         expected_error_message = "__init__() got an unexpected keyword argument 'other'"
 
         with self.assertRaises(TypeError) as cm:
@@ -71,7 +72,7 @@ class BuildtargetTests(unittest.TestCase):
 
         self.assertEqual(str(cm.exception), expected_error_message)
 
-    def test_to_string_raises_type_error_if_too_many_arguments_present_and_no_constructor(self):
+    def test_builder_raises_type_error_if_too_many_arguments_present_and_no_constructor(self):
         expected_error_message = "__init__() got an unexpected keyword argument 'other'"
 
         with self.assertRaises(TypeError) as cm:
@@ -83,7 +84,7 @@ class BuildtargetTests(unittest.TestCase):
 
         self.assertEqual(str(cm.exception), expected_error_message)
 
-    def test_to_string_ignores_private_attributes(self):
+    def test_builder_ignores_private_attributes(self):
         bar = Bar(
             name="Peter",
             age=25
@@ -91,7 +92,7 @@ class BuildtargetTests(unittest.TestCase):
         self.assertEqual(bar.name, "Peter")
         self.assertEqual(bar.age, 25)
 
-    def test_to_string_preserves_original_init(self):
+    def test_builder_preserves_original_init(self):
         baz = Baz(
             name="Courtney",
             age=24,
@@ -101,7 +102,7 @@ class BuildtargetTests(unittest.TestCase):
         self.assertEqual(baz.age, 24)
         self.assertEqual(baz.new, False)
 
-    def test_to_string_preserves_original_init_with_duplicate_init_parameters(self):
+    def test_builder_preserves_original_init_with_duplicate_init_parameters(self):
         foobar = FooBar(
             name="Courtney",
             age=24

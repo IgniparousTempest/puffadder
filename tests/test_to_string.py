@@ -6,7 +6,7 @@ from to_string import to_string
 @to_string
 class Foo(object):
     def bar(self):
-        pass
+        return "bar"
 
     name = "Lisa"
     age = 12
@@ -33,6 +33,7 @@ class BuildtargetTests(unittest.TestCase):
     def test_to_string_ignores_functions(self):
         foo = Foo()
         self.assertEqual(str(foo), "{age=12, name=Lisa}")
+        self.assertEqual(foo.bar(), "bar")
 
     def test_to_string_ignores_private_attributes(self):
         bar = Bar()
