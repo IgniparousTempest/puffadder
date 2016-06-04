@@ -4,7 +4,7 @@ A boiler plate reducing library for Python, inspired by Project Lombok for Java.
 
 ## @to_string
 
-Adds a __str__ function to the class that returns all public class attributes in a neatly formatted string.
+Adds a __str__ function to the class that returns all public instance attributes in a neatly formatted string.
 
 <table border="0">
 <tr>

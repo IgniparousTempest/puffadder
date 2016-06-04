@@ -24,8 +24,8 @@ def to_string(original_class):
                       not (
                           hasattr(self.__dict__[attr], "__call__")
                           if attr in self.__dict__
-                          else hasattr(original_class.__dict__[attr], "__call__")) and
-                      attr in original_class.__dict__]
+                          else hasattr(original_class.__dict__[attr], "__call__"))
+                      ]
 
         # Format with the value in the instance if it has been changed since instantiation
         formatted_vars = ["{}={}".format(attr,
