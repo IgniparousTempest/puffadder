@@ -16,8 +16,8 @@ def to_string(original_class):
     >> {name=Lisa, age=12}
     """
 
-    def __str__(self):
-        # Get the names of attributes that were defined in the class and make sure they have not been repurposed as
+    def __init__(self, **kwargs):
+        # Get the names of attributes that are present on the instance and make sure they have not been repurposed as
         # methods in the instance
         attributes = [attr for attr in dir(self) if
                       not attr.startswith("_") and
@@ -36,5 +36,5 @@ def to_string(original_class):
 
         return "{{{}}}".format(', '.join(formatted_vars))
 
-    original_class.__str__ = __str__
+    original_class.__init__ = __init__
     return original_class
